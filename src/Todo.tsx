@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { MouseEvent, ChangeEvent } from 'react';
 import { ITodo } from './types/Todo';
 
 type Props = {
   todo: ITodo,
-  remove: (event: React.MouseEvent<HTMLButtonElement>) => void,
-  toggle: (event: React.ChangeEvent<HTMLInputElement>) => void
+  remove: (event: MouseEvent<HTMLButtonElement>) => void,
+  toggle: (event: ChangeEvent<HTMLInputElement>) => void
 };
 
 const Todo = ({ todo, remove, toggle }: Props) => {
-
   return (
     <>
       <li id={todo.id + ''}>

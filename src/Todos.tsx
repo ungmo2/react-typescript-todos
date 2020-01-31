@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, KeyboardEvent } from 'react';
 import Todo from './Todo';
 import { ITodo } from './types/Todo';
 
@@ -14,7 +14,7 @@ const Todos = () => {
 
   const generateId = () => todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
 
-  const addTodo = ({ keyCode, target }: React.KeyboardEvent<HTMLInputElement>) => {
+  const addTodo = ({ keyCode, target }: KeyboardEvent<HTMLInputElement>) => {
     if (keyCode !== 13) return;
     const content = (target as HTMLInputElement).value;
 
