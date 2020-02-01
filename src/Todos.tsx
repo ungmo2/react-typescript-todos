@@ -1,16 +1,25 @@
-import React, { useState, useRef, KeyboardEvent } from 'react';
+import React, { useState, useEffect, useRef, KeyboardEvent } from 'react';
 import Todo from './Todo';
 import { ITodo } from './types/Todo';
 
 const Todos = () => {
-  const getTodos= (): ITodo[]  => ([
-    { id: 1, content: 'HTML', completed: false },
-    { id: 2, content: 'CSS', completed: true },
-    { id: 3, content: 'Javascript', completed: false }
-  ]);
-
-  const [todos, setTodos ] = useState(getTodos());
+  const [todos, setTodos ] = useState<ITodo[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const fetchTodos = (): Promise<ITodo[]>  => {
+    return Promise.resolve<ITodo[]>([
+      { id: 1, content: 'HTML', completed: false },
+      { id: 2, content: 'CSS', completed: true },
+      { id: 3, content: 'Javascript', completed: false }
+    ]);
+  };
+
+  useEffect(() => {
+    console.log('Todos Created!');
+    (async function () {
+      setTodos(await fetchTodos());
+    })();
+  }, []);
 
   const generateId = () => todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
 
